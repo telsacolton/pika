@@ -239,8 +239,9 @@ class BlockingConnection(base_connection.BaseConnection):
         try:
             if self._handle_read():
                 self._socket_timeouts = 0
-        except AttributeError:
-            raise exceptions.ConnectionClosed()
+				#Don't swallow this Exception so that we can see what's really happening
+        #except AttributeError:
+        #    raise exceptions.ConnectionClosed()
         except socket.timeout:
             self._handle_timeout()
         self._flush_outbound()
